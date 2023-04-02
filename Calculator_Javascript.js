@@ -32,7 +32,7 @@ function Input_Decimal(dot) {
     //this ensures the accidenta; clicking  of decimald doesnt
     //cause bugs
     if(Calculator.Wait_Second_Operand === true) return;
-    if(Calculator.Display_Value.includes(dot)) {
+    if(!Calculator.Display_Value.includes(dot)) {
         Calculator.Display_Value += dot;
     }
 }
@@ -79,7 +79,7 @@ const Perform_Calculation = {
 };
 
 function Calclator_Rest() {
-    Calclator.Display_Value = '0';
+    Calculator.Display_Value = '0';
     Calculator.First_Operand = null;
     Calculator.Wait_Second_Operand = false;
     Calculator.operator = null;
