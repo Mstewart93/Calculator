@@ -71,11 +71,11 @@ function Handle_Operator(Next_Operator) {
     Calculator.operator = Next_Operator;
 }
 const Perform_Calculation = {
-    '/' (First_Operand, Second_Operand) => First_Operand / Second_Operand,
-    '*' (First_Operand, Second_Operand) => First_Operand * Second_Operand,
-    '+' (First_Operand, Second_Operand) => First_Operand + Second_Operand,
-    '-' (First_Operand, Second_Operand) => First_Operand - Second_Operand,
-    '=' (First_Operand, Second_Operand) => Second_Operand
+    '/' : (First_Operand, Second_Operand) => First_Operand / Second_Operand,
+    '*' : (First_Operand, Second_Operand) => First_Operand * Second_Operand,
+    '+' : (First_Operand, Second_Operand) => First_Operand + Second_Operand,
+    '-' : (First_Operand, Second_Operand) => First_Operand - Second_Operand,
+    '=' : (First_Operand, Second_Operand) => Second_Operand
 };
 
 function Calclator_Rest() {
@@ -94,3 +94,32 @@ function Update_Display() {
 }
 
 Update_Display(); 
+// this section monitors button clicks
+const keys = document.querySelector('.calculator-keys');
+keys.addEventListener('click', (event) => {
+    //The target variable is an object that represents the element
+    //that was clicked
+    const { target } = event;
+    //if the element that was cliked on is not a button exit the function
+    if (!target.matches('button')) {
+        return;
+    }
+    if (target.classList.contains(operator)) {
+        Handle_Operator(target.value);
+        Update_Display();
+        return
+    }
+    if (target.classList.contains('decimal')) {
+        Input_Decimal(target.value);
+        Update_Display();
+        return;
+    }
+    //ensures that AC clears all inputs from the calculator screen.
+    if (target.classList.contains('all-clear')) {
+        Calclator_Rest();
+        Update_Display();
+        return;
+    }
+    Input_Digit(target.value);
+    Update_Display();
+})
