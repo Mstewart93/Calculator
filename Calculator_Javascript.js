@@ -104,7 +104,7 @@ keys.addEventListener('click', (event) => {
     if (!target.matches('button')) {
         return;
     }
-    if (target.classList.contains(operator)) {
+    if (target.classList.contains("operator")) {
         Handle_Operator(target.value);
         Update_Display();
         return
